@@ -64,10 +64,26 @@ def num(value, default=0.0):
 
 
 def closed_candles(symbol: str, interval: str, limit: int):
-    raw = api(
-        "/fapi/v1/klines",
-        {"symbol": symbol, "interval": interval, "limit": limit},
-    )
+    params = {"symbol": symbol, "interval": interval, "limit": limit}
+    try:
+        raw = api("/fapi/v1/klines", params)
+        source = "fapi"
+    except Exception as primary_error:
+        # Official Binance derivatives docs state the DAPI kline endpoint
+        # accepts both CM and UM symbols after the CM migration.
+        try:
+            time.sleep(0.4)
+            raw = api(
+                "/dapi/v1/klines",
+                params,
+                base=KLINE_FALLBACK_BASE,
+            )
+            source = "dapi_fallback"
+        except Exception as fallback_error:
+            raise RuntimeError(
+                f"fapi klines failed: {primary_error}; "
+                f"dapi fallback failed: {fallback_error}"
+            )
     now_ms = int(time.time() * 1000)
 
     out = []
@@ -81,6 +97,7 @@ def closed_candles(symbol: str, interval: str, limit: int):
                     "l": num(x[3]),
                     "c": num(x[4]),
                     "v": num(x[5]),
+                    "source": source,
                 }
             )
     return out
@@ -310,12 +327,18 @@ def main():
                 }
             )
 
-    signals = [r for r in results if r["status"] == "PASS"]
+    valid_second_checks = [
+        r for r in results
+        if not str(r.get("reason", "")).startswith("data error:")
+    ]
+    raw_signals = [r for r in results if r["status"] == "PASS"]
 
-    if scanned < 50:
+    if scanned < 50 or len(valid_second_checks) < 3:
         status = "SCAN_INCOMPLETE"
-    elif signals:
+        signals = []
+    elif raw_signals:
         status = "SIGNAL_FOUND"
+        signals = raw_signals
     else:
         status = "NO_VALID_ENTRY"
 
@@ -328,6 +351,7 @@ def main():
         "eligible_liquid_count": len(rows),
         "scanned_symbol_count": scanned,
         "shortlist": [x["symbol"] for x in shortlist],
+        "valid_second_check_count": len(valid_second_checks),
         "results": results,
         "signals": signals,
     }
