@@ -1,0 +1,42 @@
+{
+  "timestamp_qostanay": "2026-09-24T01:07:08+05:00",
+  "mode": "PAPER_SIGNAL_ONLY",
+  "status": "NO_VALID_ENTRY",
+  "eligible_liquid_count": 180,
+  "scanned_symbol_count": 50,
+  "shortlist": [
+    "USELESSUSDT",
+    "TRUMPUSDT",
+    "1000PEPEUSDT",
+    "WIFUSDT",
+    "WLDUSDT"
+  ],
+  "results": [
+    {
+      "symbol": "USELESSUSDT",
+      "status": "REJECT",
+      "reason": "data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot"
+    },
+    {
+      "symbol": "TRUMPUSDT",
+      "status": "REJECT",
+      "reason": "data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot"
+    },
+    {
+      "symbol": "1000PEPEUSDT",
+      "status": "REJECT",
+      "reason": "data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot"
+    },
+    {
+      "symbol": "WIFUSDT",
+      "status": "REJECT",
+      "reason": "data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot"
+    },
+    {
+      "symbol": "WLDUSDT",
+      "status": "REJECT",
+      "reason": "data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot"
+    }
+  ],
+  "signals": []
+}
