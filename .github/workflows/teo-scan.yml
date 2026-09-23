@@ -1,10 +1,20 @@
 name: Teo Binance Helper
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/teo-scan.yml"
   workflow_dispatch:
+  schedule:
+    - cron: "15,30,45 * * * *"
 
 permissions:
   contents: write
+
+concurrency:
+  group: teo-binance-helper
+  cancel-in-progress: true
 
 jobs:
   scan:
@@ -15,14 +25,45 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+      - name: Wake Render and run PAPER scan in Singapore
+        run: |
+          mkdir -p reports
+          curl -fsS --retry 3 --retry-delay 5 --max-time 180             https://teo-binance-helper.onrender.com/scan             -o reports/latest.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("reports/latest.json")
+          data=json.loads(p.read_text(encoding="utf-8"))
+          lines=[
+              "# Teo Binance Helper — latest scan",
+              "",
+              f"- Time Asia/Qostanay: **{data.get('timestamp_qostanay','')}**",
+              f"- Mode: **{data.get('mode','')}**",
+              f"- Status: **{data.get('status','')}**",
+              f"- Breadth checked: **{data.get('scanned_symbol_count','')}**",
+              f"- Shortlist: **{', '.join(data.get('shortlist',[]))}**",
+              "",
+              "## Decisions",
+              "",
+          ]
+          for r in data.get("results",[]):
+              extra=""
+              if r.get("status")=="PASS":
+                  extra=f" — {r.get('side')} | Entry {r.get('entry')} | SL {r.get('sl')} | TP {r.get('tp')} | {r.get('class')}"
+              lines.append(f"- **{r.get('symbol')} — {r.get('status')}**{extra}: {r.get('reason')}")
+          lines += ["","_PAPER / signal only. No real orders._",""]
+          Path("reports/latest.md").write_text("\n".join(lines),encoding="utf-8")
+          print(json.dumps(data,ensure_ascii=False,indent=2))
+          PY
 
-      - name: Run PAPER scan
-        run: python teo_helper.py
-
-# Scheduled GitHub runs are intentionally disabled.
-# Reason: GitHub-hosted runner egress from a US Azure region receives
-# Binance Futures HTTP 451. The scanner code is preserved for diagnostics.
+      - name: Save latest report
+        run: |
+          git config user.name "teo-binance-helper"
+          git config user.email "actions@users.noreply.github.com"
+          git add reports/latest.json reports/latest.md
+          if git diff --cached --quiet; then
+            echo "No report changes."
+          else
+            git commit -m "Update Teo PAPER scan report"
+            git push
+          fi
