@@ -37,8 +37,8 @@ MAX_CHASE = 0.0025
 TZ = timezone(timedelta(hours=5))
 
 
-def api(path: str, params: dict | None = None):
-    url = BASE + path
+def api(path: str, params: dict | None = None, base: str | None = None):
+    url = (base or BASE) + path
     if params:
         url += "?" + urllib.parse.urlencode(params)
 
