@@ -1,13 +1,7 @@
 name: Teo Binance Helper
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/teo-scan.yml"
   workflow_dispatch:
-  schedule:
-    - cron: "15,30,45 * * * *"
 
 permissions:
   contents: write
