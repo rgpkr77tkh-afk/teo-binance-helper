@@ -25,6 +25,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 BASE = "https://fapi.binance.com"
+KLINE_FALLBACK_BASE = "https://dapi.binance.com"
 EXCLUDED = {"BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT"}
 
 MIN_QUOTE_VOLUME = 10_000_000
