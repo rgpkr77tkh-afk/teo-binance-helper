@@ -20,6 +20,7 @@ import math
 import time
 import urllib.parse
 import urllib.request
+import urllib.error
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -49,6 +50,11 @@ def api(path: str, params: dict | None = None):
             )
             with urllib.request.urlopen(req, timeout=20) as response:
                 return json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+            if exc.code in (418, 451):
+                raise RuntimeError(f"HTTP {exc.code}")
+            time.sleep(1.5 * (attempt + 1))
         except Exception as exc:
             last_error = exc
             time.sleep(1.5 * (attempt + 1))
@@ -69,20 +75,25 @@ def closed_candles(symbol: str, interval: str, limit: int):
         raw = api("/fapi/v1/klines", params)
         source = "fapi"
     except Exception as primary_error:
-        # Official Binance derivatives docs state the DAPI kline endpoint
-        # accepts both CM and UM symbols after the CM migration.
+        # Official Binance COIN-M continuousKlines accepts UM pair values
+        # after the CM migration. Use it as a separate-domain fallback.
         try:
-            time.sleep(0.4)
+            time.sleep(0.2)
             raw = api(
-                "/dapi/v1/klines",
-                params,
+                "/dapi/v1/continuousKlines",
+                {
+                    "pair": symbol,
+                    "contractType": "PERPETUAL",
+                    "interval": interval,
+                    "limit": limit,
+                },
                 base=KLINE_FALLBACK_BASE,
             )
-            source = "dapi_fallback"
+            source = "dapi_continuous_fallback"
         except Exception as fallback_error:
             raise RuntimeError(
                 f"fapi klines failed: {primary_error}; "
-                f"dapi fallback failed: {fallback_error}"
+                f"dapi continuous fallback failed: {fallback_error}"
             )
     now_ms = int(time.time() * 1000)
 
