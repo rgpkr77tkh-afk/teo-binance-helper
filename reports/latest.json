@@ -1,19 +1,24 @@
 {
-  "timestamp_qostanay": "2026-09-24T05:32:30+05:00",
+  "timestamp_qostanay": "2026-09-24T05:54:31+05:00",
   "mode": "PAPER_SIGNAL_ONLY",
   "status": "NO_VALID_ENTRY",
   "eligible_liquid_count": 179,
   "scanned_symbol_count": 50,
   "shortlist": [
     "1000PEPEUSDT",
+    "LSKUSDT",
     "UNIUSDT",
-    "ARBUSDT",
-    "TRUMPUSDT",
-    "FILUSDT"
+    "龙虾USDT",
+    "TRUMPUSDT"
   ],
   "results": [
     {
       "symbol": "1000PEPEUSDT",
+      "status": "REJECT",
+      "reason": "data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot"
+    },
+    {
+      "symbol": "LSKUSDT",
       "status": "REJECT",
       "reason": "data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot"
     },
@@ -23,17 +28,12 @@
       "reason": "data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot"
     },
     {
-      "symbol": "ARBUSDT",
+      "symbol": "龙虾USDT",
       "status": "REJECT",
       "reason": "data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot"
     },
     {
       "symbol": "TRUMPUSDT",
-      "status": "REJECT",
-      "reason": "data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot"
-    },
-    {
-      "symbol": "FILUSDT",
       "status": "REJECT",
       "reason": "data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot"
     }
