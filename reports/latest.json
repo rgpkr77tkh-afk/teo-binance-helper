@@ -1,5 +1,5 @@
 {
-  "timestamp_qostanay": "2026-09-24T10:51:13+05:00",
+  "timestamp_qostanay": "2026-09-24T10:53:03+05:00",
   "mode": "PAPER_SIGNAL_ONLY",
   "status": "SCAN_INCOMPLETE",
   "eligible_liquid_count": 171,
@@ -7,9 +7,9 @@
   "shortlist": [
     "UNIUSDT",
     "1000PEPEUSDT",
+    "TRUMPUSDT",
     "TAKEUSDT",
-    "AKEUSDT",
-    "TRUMPUSDT"
+    "FARTCOINUSDT"
   ],
   "valid_second_check_count": 0,
   "results": [
@@ -24,17 +24,17 @@
       "reason": "data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'"
     },
     {
+      "symbol": "TRUMPUSDT",
+      "status": "REJECT",
+      "reason": "data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'"
+    },
+    {
       "symbol": "TAKEUSDT",
       "status": "REJECT",
       "reason": "data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'"
     },
     {
-      "symbol": "AKEUSDT",
-      "status": "REJECT",
-      "reason": "data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'"
-    },
-    {
-      "symbol": "TRUMPUSDT",
+      "symbol": "FARTCOINUSDT",
       "status": "REJECT",
       "reason": "data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'"
     }
