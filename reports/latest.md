@@ -1,17 +1,17 @@
 # Teo Binance Helper — latest scan
 
-- Time Asia/Qostanay: **2026-09-24T10:41:33+05:00**
+- Time Asia/Qostanay: **2026-09-24T10:51:13+05:00**
 - Mode: **PAPER_SIGNAL_ONLY**
-- Status: **NO_VALID_ENTRY**
+- Status: **SCAN_INCOMPLETE**
 - Breadth checked: **50**
-- Shortlist: **1000PEPEUSDT, UNIUSDT, FARTCOINUSDT, ARBUSDT, TRUMPUSDT**
+- Shortlist: **UNIUSDT, 1000PEPEUSDT, TAKEUSDT, AKEUSDT, TRUMPUSDT**
 
 ## Decisions
 
-- **1000PEPEUSDT — REJECT**: H1/M15 conflict MIXED/UP
-- **UNIUSDT — REJECT**: H1/M15 conflict MIXED/UP
-- **FARTCOINUSDT — REJECT**: data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot
-- **ARBUSDT — REJECT**: H1/M15 conflict MIXED/MIXED
-- **TRUMPUSDT — REJECT**: H1/M15 conflict MIXED/UP
+- **UNIUSDT — REJECT**: data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'
+- **1000PEPEUSDT — REJECT**: data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'
+- **TAKEUSDT — REJECT**: data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'
+- **AKEUSDT — REJECT**: data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'
+- **TRUMPUSDT — REJECT**: data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'
 
 _PAPER / signal only. No real orders._

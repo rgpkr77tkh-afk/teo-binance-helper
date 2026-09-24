@@ -1,41 +1,42 @@
 {
-  "timestamp_qostanay": "2026-09-24T10:41:33+05:00",
+  "timestamp_qostanay": "2026-09-24T10:51:13+05:00",
   "mode": "PAPER_SIGNAL_ONLY",
-  "status": "NO_VALID_ENTRY",
-  "eligible_liquid_count": 170,
+  "status": "SCAN_INCOMPLETE",
+  "eligible_liquid_count": 171,
   "scanned_symbol_count": 50,
   "shortlist": [
-    "1000PEPEUSDT",
     "UNIUSDT",
-    "FARTCOINUSDT",
-    "ARBUSDT",
+    "1000PEPEUSDT",
+    "TAKEUSDT",
+    "AKEUSDT",
     "TRUMPUSDT"
   ],
+  "valid_second_check_count": 0,
   "results": [
-    {
-      "symbol": "1000PEPEUSDT",
-      "status": "REJECT",
-      "reason": "H1/M15 conflict MIXED/UP"
-    },
     {
       "symbol": "UNIUSDT",
       "status": "REJECT",
-      "reason": "H1/M15 conflict MIXED/UP"
+      "reason": "data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'"
     },
     {
-      "symbol": "FARTCOINUSDT",
+      "symbol": "1000PEPEUSDT",
       "status": "REJECT",
-      "reason": "data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot"
+      "reason": "data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'"
     },
     {
-      "symbol": "ARBUSDT",
+      "symbol": "TAKEUSDT",
       "status": "REJECT",
-      "reason": "H1/M15 conflict MIXED/MIXED"
+      "reason": "data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'"
+    },
+    {
+      "symbol": "AKEUSDT",
+      "status": "REJECT",
+      "reason": "data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'"
     },
     {
       "symbol": "TRUMPUSDT",
       "status": "REJECT",
-      "reason": "H1/M15 conflict MIXED/UP"
+      "reason": "data error: fapi klines failed: HTTP 418; dapi continuous fallback failed: api() got an unexpected keyword argument 'base'"
     }
   ],
   "signals": []
