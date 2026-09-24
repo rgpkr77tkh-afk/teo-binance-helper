@@ -1,17 +1,17 @@
 # Teo Binance Helper — latest scan
 
-- Time Asia/Qostanay: **2026-09-24T08:51:48+05:00**
+- Time Asia/Qostanay: **2026-09-24T09:26:01+05:00**
 - Mode: **PAPER_SIGNAL_ONLY**
 - Status: **NO_VALID_ENTRY**
 - Breadth checked: **50**
-- Shortlist: **1000PEPEUSDT, AKEUSDT, LSKUSDT, PONSUSDT, ZENUSDT**
+- Shortlist: **ARBUSDT, 1000PEPEUSDT, UNIUSDT, AKEUSDT, B2USDT**
 
 ## Decisions
 
+- **ARBUSDT — REJECT**: data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot
 - **1000PEPEUSDT — REJECT**: data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot
+- **UNIUSDT — REJECT**: data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot
 - **AKEUSDT — REJECT**: data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot
-- **LSKUSDT — REJECT**: data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot
-- **PONSUSDT — REJECT**: data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot
-- **ZENUSDT — REJECT**: data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot
+- **B2USDT — REJECT**: data error: Binance request failed /fapi/v1/klines: HTTP Error 418: I'm a teapot
 
 _PAPER / signal only. No real orders._
